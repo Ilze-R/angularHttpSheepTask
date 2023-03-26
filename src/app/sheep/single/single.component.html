@@ -1,9 +1,11 @@
-<header>
-  <h2>
-    {{ sheep.name }}
-  </h2>
-</header>
-<section>
-  <h3>{{ sheep.tagline }}</h3>
-  <article>{{ sheep.description }}</article>
-</section>
+<fieldset *ngIf="sheepByName | async as one_sheep">
+  <header>
+    <h2>
+      {{ one_sheep?.name }}
+    </h2>
+  </header>
+  <section>
+    <h3>{{ one_sheep?.tagline }}</h3>
+    <article>{{ one_sheep?.description }}</article>
+  </section>
+</fieldset>
