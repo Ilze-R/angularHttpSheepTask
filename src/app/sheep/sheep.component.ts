@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { map, Observable, of } from 'rxjs';
+import { SheepServiceService } from '../service/sheep-service.service';
 import { Sheep } from '../types';
 
 @Component({
@@ -7,9 +10,30 @@ import { Sheep } from '../types';
   templateUrl: './sheep.component.html',
   styleUrls: ['./sheep.component.scss'],
 })
-export class SheepComponent {
-  sheep: Sheep[];
-  constructor() {
-    this.sheep = [{ title: 'I am a sheep', name: 'Wooly', tagline: 'Baaaaa' }];
+export class SheepComponent implements OnInit {
+  // sheep: Sheep[];
+  sheepByName!: Observable<Sheep>;
+  sheep!: Observable<Sheep[]>;
+  private url = 'https://baal.fdp.workers.dev/sheep';
+
+  constructor(
+    private service: SheepServiceService,
+    private route: ActivatedRoute,
+    private http: HttpClient
+  ) {
+    // this.sheep = [{ title: 'jashg', name: 'Wooly', tagline: 'Baaaaa' }];
+  }
+  ngOnInit(): void {
+    this.sheep = this.service.getSheeps().pipe(
+      map((data) => {
+        console.log(data);
+        return data;
+      })
+    );
+    const name = this.route.snapshot.paramMap.get('name');
+
+    if (name) {
+      this.sheepByName = this.service.getSheepByName(name);
+    }
   }
 }

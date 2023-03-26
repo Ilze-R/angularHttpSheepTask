@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -8,8 +9,8 @@ import { SingleComponent } from './sheep/single/single.component';
 
 @NgModule({
   declarations: [AppComponent, EntryComponent, SheepComponent, SingleComponent],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  providers: [HttpClientModule, HttpClient],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
