@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Observable, Subject, of, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
 import { Sheep, SheepDetailed } from '../types';
 
 @Injectable({

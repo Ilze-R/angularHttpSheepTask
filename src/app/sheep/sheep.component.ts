@@ -12,7 +12,6 @@ import { Sheep } from '../types';
 })
 export class SheepComponent implements OnInit {
   // sheep: Sheep[];
-  sheepByName!: Observable<Sheep>;
   sheep!: Observable<Sheep[]>;
   private url = 'https://baal.fdp.workers.dev/sheep';
 
@@ -30,10 +29,5 @@ export class SheepComponent implements OnInit {
         return data;
       })
     );
-    const name = this.route.snapshot.paramMap.get('name');
-
-    if (name) {
-      this.sheepByName = this.service.getSheepByName(name);
-    }
   }
 }
